@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react"; // ⭐
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
@@ -11,7 +12,12 @@ import TaskList from "./pages/TaskList";
 import './App.css';
 
 const App = () => {
-  const token = localStorage.getItem('token'); // ⭐ Check token
+  const [token, setToken] = useState(null); // ⭐
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+  }, []);
 
   return (
     <Router>
